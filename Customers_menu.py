@@ -85,3 +85,50 @@ def transactions_by_date_range(SSN, start_timeid, end_timeid):
     result = mycursor.fetchall()
     for row in result:
         print(row)
+
+def display_menu():
+    print("Customer Menu")
+    print("1. Display customer info by credit card number")
+    print("2. Modify customer info by SSN, address, city, state, and zip")
+    print("3. Display customer monthly bill by credit card number, month, and year")
+    print("4. Display customer transactions between two dates by SSN, start and end date")
+    print("5. Exit")
+
+while True:
+    display_menu()
+    selection = input("Please enter your selection based on the numeric values above: ")
+    
+    try:
+        selection = int(selection)
+    except:
+        print("Please choose one of the numeric values above")
+        continue
+
+    if selection < 1:
+        print("Please enter a number that is greater than 0")
+        continue
+
+    if selection == 1:
+        credit_card_no =input("Enter Credit Card Number: ") 
+        customer_account_info(credit_card_no)
+    elif selection == 2:
+        SSN = input("Enter SSN: ")
+        new_address = input("Enter Address: ")
+        new_city = input("Enter City: ")
+        new_state = input("Enter State: ")
+        new_zip = input("Enter Zip Code: ")
+        modify_customer_account_details(SSN, new_address, new_city, new_state, new_zip)
+    elif selection == 3:
+        credit_card_no = input("Enter Credit Card Number: ")
+        month = input("Enter month: ")
+        year = input("Enter year: ")
+        generate_monthly_bill(credit_card_no, month, year)
+    elif selection == 4:
+        SSN = input("Enter SSN: ")
+        start_timeid = input("Enter start: ")
+        end_timeid = input("Enter end: ")
+        transactions_by_date_range(SSN, start_timeid, end_timeid)
+    elif selection == 5:
+        break
+    else:
+        print("Please make a valid selection")
