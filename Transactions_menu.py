@@ -6,7 +6,7 @@ from pyspark.sql.functions import*
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType, DoubleType
 import pandas as pd
 import datetime
-spark = SparkSession.builder.master("local[*]").appName("Menus").getOrCreate()
+
 
 # Establish a connection to the database
 mydb = mysql.connector.connect(
