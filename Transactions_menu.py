@@ -78,7 +78,7 @@ while True:
 
     if selection == 1:
         zipcode = input("Enter zip code: ")
-        month = input("Enter month (1-12): ")
+        month = input("Enter month (01-12): ")
         year = input("Enter year (YYYY): ")
         transactions_zip_month_year(zipcode, month, year)
     elif selection == 2:

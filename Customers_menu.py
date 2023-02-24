@@ -148,13 +148,13 @@ while True:
             print("Customer not found")
     elif selection == 3:
         credit_card_no = input("Enter Credit Card Number: ")
-        month = input("Enter month: ")
-        year = input("Enter year: ")
+        month = input("Enter month Ex(01): ")
+        year = input("Enter year Ex(2018): ")
         generate_monthly_bill(credit_card_no, month, year)
     elif selection == 4:
         SSN = input("Enter SSN: ")
-        start_timeid = input("Enter start: ")
-        end_timeid = input("Enter end: ")
+        start_timeid = input("Enter start Ex(201801): ")
+        end_timeid = input("Enter end Ex(201802): ")
         transactions_by_date_range(SSN, start_timeid, end_timeid)
     elif selection == 5:
         break
