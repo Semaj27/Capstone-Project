@@ -32,13 +32,38 @@ def customer_account_info(credit_card_no):
     for row in result:
         print(row)
 
-def modify_customer_account_details(SSN, new_address, new_city, new_state, new_zip):
-    sql = "UPDATE CDW_SAPP_CUSTOMER \
-           SET ADDRESS = %s, CUST_CITY = %s, CUST_STATE = %s, CUST_ZIP = %s \
-           WHERE SSN = %s"
-    val = (new_address, new_city, new_state, new_zip, SSN)
+def modify_customer_account_details(SSN):
+    print("Which customer account detail would you like to update?")
+    print("1. Address")
+    print("2. City")
+    print("3. State")
+    print("4. Zip")
+    choice = int(input("Enter your choice (1-4): "))
+    
+    # determine which field to update based on user's choice
+    if choice == 1:
+        field = "ADDRESS"
+        new_value = input("Enter new address: ")
+    elif choice == 2:
+        field = "CUST_CITY"
+        new_value = input("Enter new city: ")
+    elif choice == 3:
+        field = "CUST_STATE"
+        new_value = input("Enter new state: ")
+    elif choice == 4:
+        field = "CUST_ZIP"
+        new_value = input("Enter new zip: ")
+    else:
+        print("Invalid choice")
+        return
+    
+    # update the customer account detail in the database
+    sql = f"UPDATE CDW_SAPP_CUSTOMER SET {field} = %s WHERE SSN = %s"
+    val = (new_value, SSN)
     mycursor.execute(sql, val)
     mydb.commit()
+    
+    # print the number of affected records
     print(mycursor.rowcount, "record(s) affected")
 
 def generate_monthly_bill(credit_card_no, month, year):
@@ -112,12 +137,15 @@ while True:
         credit_card_no =input("Enter Credit Card Number: ") 
         customer_account_info(credit_card_no)
     elif selection == 2:
-        SSN = input("Enter SSN: ")
-        new_address = input("Enter Address: ")
-        new_city = input("Enter City: ")
-        new_state = input("Enter State: ")
-        new_zip = input("Enter Zip Code: ")
-        modify_customer_account_details(SSN, new_address, new_city, new_state, new_zip)
+        SSN = input("Enter customer SSN: ")
+        sql = "SELECT * FROM CDW_SAPP_CUSTOMER WHERE SSN = %s"
+        val = (SSN,)
+        mycursor.execute(sql, val)
+        result = mycursor.fetchone()
+        if result:
+            modify_customer_account_details(SSN)
+        else:
+            print("Customer not found")
     elif selection == 3:
         credit_card_no = input("Enter Credit Card Number: ")
         month = input("Enter month: ")
