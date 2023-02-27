@@ -1,0 +1,4 @@
+findspark
+mysql.connector
+pandas 
+datetime
