@@ -159,4 +159,4 @@ while True:
     elif selection == 5:
         break
     else:
-        print("Please make a valid selection")
+        print("Please make a valid selection ")
