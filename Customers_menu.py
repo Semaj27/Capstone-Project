@@ -6,13 +6,14 @@ from pyspark.sql.functions import*
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType, DoubleType
 import pandas as pd
 import datetime
+from secret import name, pw
 spark = SparkSession.builder.master("local[*]").appName("Menus").getOrCreate()
 
 # Establish a connection to the database
 mydb = mysql.connector.connect(
   host="localhost",
-  user="root",
-  password="password",
+  user= name,
+  password= pw,
   database="creditcard_capstone"
 )
 # Create a cursor object to execute SQL queries
